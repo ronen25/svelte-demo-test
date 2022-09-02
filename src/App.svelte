@@ -2,6 +2,8 @@
   import fetchData from './services/dataService';
   import NameList from './lib/NameList.svelte';
 
+  console.log('la');
+
   let counter = 0;
 
   const incrementCount = () => {
@@ -16,13 +18,23 @@
     {counter}
   </button>
 
-  <div>
+  <div class="container">
     {#await fetchData()}
       <p>LOADING</p>
     {:then data}
       <NameList names={data} />
     {:catch error}
-      <p>ERROR</p>
+      <p>{error}</p>
     {/await}
   </div>
 </main>
+
+<style>
+  .container {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
